@@ -86,10 +86,10 @@ export const JointEntryCard: React.FC<JointEntryCardProps> = ({
   const isSeverityMissing = showErrors && item.severity === null;
 
   return (
-    <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-md space-y-4 transition-all">
+    <div className="bg-[#0c1322] border border-cyan-950/70 rounded-2xl p-4 shadow-md space-y-4 transition-all">
       {/* Header of Joint Card */}
       <div className="flex items-center justify-between">
-        <span className="text-xs font-bold uppercase tracking-wider text-amber-400">
+        <span className="text-xs font-bold uppercase tracking-wider text-cyan-400">
           Joint #{index + 1}
         </span>
         {canRemove && onRemove && (
@@ -109,22 +109,22 @@ export const JointEntryCard: React.FC<JointEntryCardProps> = ({
         {/* Joint Selection */}
         <div>
           <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5">
-            Joint <span className="text-amber-400">*</span>
+            Joint <span className="text-cyan-400">*</span>
           </label>
           <div className="space-y-2">
             <select
               value={isOtherSelected ? '__OTHER__' : item.joint}
               onChange={(e) => handleJointSelect(e.target.value)}
-              className={`w-full bg-slate-950 border rounded-xl px-3.5 py-2.5 text-sm font-medium text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500 transition-colors ${
+              className={`w-full bg-[#070c18] border rounded-xl px-3.5 py-2.5 text-sm font-medium text-slate-100 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-colors ${
                 isJointMissing ? 'border-red-500' : 'border-slate-800'
               }`}
             >
               {sortedJointOptions.map((j) => (
-                <option key={j} value={j} className="bg-slate-900 text-slate-100">
+                <option key={j} value={j} className="bg-[#0c1322] text-slate-100">
                   {j}
                 </option>
               ))}
-              <option value="__OTHER__" className="bg-slate-900 text-amber-300">
+              <option value="__OTHER__" className="bg-[#0c1322] text-cyan-300">
                 ✏️ Other (Enter custom joint)...
               </option>
             </select>
@@ -136,7 +136,7 @@ export const JointEntryCard: React.FC<JointEntryCardProps> = ({
                 onChange={(e) => handleCustomJointChange(e.target.value)}
                 placeholder="e.g. Neck, Lower back, Big toe..."
                 autoFocus
-                className={`w-full bg-slate-950 border rounded-xl px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500 ${
+                className={`w-full bg-[#070c18] border rounded-xl px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 ${
                   isJointMissing ? 'border-red-500' : 'border-slate-700'
                 }`}
               />
@@ -155,8 +155,8 @@ export const JointEntryCard: React.FC<JointEntryCardProps> = ({
               onClick={() => toggleSide('left')}
               className={`rounded-xl text-xs font-bold transition-all flex items-center justify-center border touch-manipulation ${
                 isLeftActive
-                  ? 'bg-amber-500 text-slate-950 border-amber-400 shadow-md shadow-amber-500/20'
-                  : 'bg-slate-950/70 text-slate-400 border-slate-800 hover:text-slate-200'
+                  ? 'bg-gradient-to-r from-cyan-400 to-sky-500 text-slate-950 border-cyan-400 shadow-md shadow-cyan-500/25'
+                  : 'bg-[#070c18] text-slate-400 border-slate-800/80 hover:text-slate-200'
               }`}
             >
               LEFT
@@ -166,8 +166,8 @@ export const JointEntryCard: React.FC<JointEntryCardProps> = ({
               onClick={() => toggleSide('right')}
               className={`rounded-xl text-xs font-bold transition-all flex items-center justify-center border touch-manipulation ${
                 isRightActive
-                  ? 'bg-amber-500 text-slate-950 border-amber-400 shadow-md shadow-amber-500/20'
-                  : 'bg-slate-950/70 text-slate-400 border-slate-800 hover:text-slate-200'
+                  ? 'bg-gradient-to-r from-cyan-400 to-sky-500 text-slate-950 border-cyan-400 shadow-md shadow-cyan-500/25'
+                  : 'bg-[#070c18] text-slate-400 border-slate-800/80 hover:text-slate-200'
               }`}
             >
               RIGHT

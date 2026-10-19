@@ -5,6 +5,7 @@ import { DayRecord, JointEntry } from '../types';
 import { SevenDayStrip } from './SevenDayStrip';
 import { FullCalendarModal } from './FullCalendarModal';
 import { JointEntryCard, JointDraftItem } from './JointEntryCard';
+import { HomescreenBanner } from './HomescreenBanner';
 import {
   getSortedJointOptions,
   saveEntriesForDate,
@@ -256,9 +257,13 @@ export const EntryForm: React.FC<EntryFormProps> = ({
   };
 
   const isEditingExisting = !!existingDayRecord && existingDayRecord.entries.length > 0;
+  const entriesToday = dayRecords.find((r) => r.date === todayStr)?.entries.length || 0;
 
   return (
     <div className="w-full max-w-xl mx-auto space-y-4">
+      {/* Homescreen Brand Banner */}
+      <HomescreenBanner entriesTodayCount={entriesToday} />
+
       {/* 7-Day Quick Strip & Calendar Trigger */}
       <SevenDayStrip
         selectedDate={selectedDate}
@@ -270,11 +275,11 @@ export const EntryForm: React.FC<EntryFormProps> = ({
       {/* Date Header & Existing Badge */}
       <div className="flex items-center justify-between px-1">
         <div className="flex items-center gap-2">
-          <h2 className="text-lg font-extrabold text-slate-100">
+          <h2 className="text-lg font-extrabold text-white">
             {selectedDate === todayStr ? 'Today’s Log' : format(new Date(selectedDate + 'T00:00:00'), 'EEEE, MMMM d, yyyy')}
           </h2>
           {isEditingExisting && (
-            <span className="px-2 py-0.5 text-[11px] font-semibold bg-amber-500/20 text-amber-300 border border-amber-500/40 rounded-full">
+            <span className="px-2 py-0.5 text-[11px] font-semibold bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 rounded-full">
               Editing Prior
             </span>
           )}
@@ -322,14 +327,14 @@ export const EntryForm: React.FC<EntryFormProps> = ({
         <button
           type="button"
           onClick={handleAddJoint}
-          className="w-full py-3 px-4 rounded-2xl border border-dashed border-slate-700 bg-slate-900/50 hover:bg-slate-800/80 text-amber-400 hover:text-amber-300 font-semibold text-sm flex items-center justify-center gap-2 transition-all active:scale-[0.99] touch-manipulation shadow-sm"
+          className="w-full py-3 px-4 rounded-2xl border border-dashed border-cyan-800/60 bg-cyan-950/20 hover:bg-cyan-950/40 text-cyan-300 hover:text-cyan-200 font-semibold text-sm flex items-center justify-center gap-2 transition-all active:scale-[0.99] touch-manipulation shadow-sm"
         >
           <Plus className="w-4 h-4 stroke-[2.5]" />
           <span>Add Another Joint</span>
         </button>
 
         {/* Notes Field (Shared across date) */}
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-md space-y-2">
+        <div className="bg-[#0c1322] border border-cyan-950/70 rounded-2xl p-4 shadow-md space-y-2">
           <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300">
             Daily Notes <span className="text-slate-500 font-normal lowercase">(optional)</span>
           </label>
@@ -338,7 +343,7 @@ export const EntryForm: React.FC<EntryFormProps> = ({
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
             placeholder="How are you feeling overall? Triggers, medication, weather, activities..."
-            className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500 transition-colors resize-none"
+            className="w-full bg-[#070c18] border border-slate-800 rounded-xl p-3 text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-colors resize-none"
           />
           <div className="text-[11px] text-slate-500">
             One shared notes field per date, attached to the primary joint entry.
@@ -356,7 +361,7 @@ export const EntryForm: React.FC<EntryFormProps> = ({
         {/* Primary Save CTA Button */}
         <button
           type="submit"
-          className="w-full h-14 bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:brightness-105 active:scale-[0.99] text-slate-950 font-extrabold text-base rounded-2xl shadow-xl shadow-amber-500/20 flex items-center justify-center gap-2.5 transition-all touch-manipulation cursor-pointer"
+          className="w-full h-14 bg-gradient-to-r from-cyan-400 via-sky-400 to-indigo-500 hover:brightness-110 active:scale-[0.99] text-slate-950 font-black text-base rounded-2xl shadow-xl shadow-cyan-500/25 flex items-center justify-center gap-2.5 transition-all touch-manipulation cursor-pointer"
         >
           <Sparkles className="w-5 h-5 text-slate-900" />
           <span>{isEditingExisting ? 'Update Record' : 'Save Joint Entry'}</span>

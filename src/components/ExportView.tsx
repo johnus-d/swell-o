@@ -64,10 +64,11 @@ export const ExportView: React.FC<ExportViewProps> = ({ allEntries, onExportDone
       </div>
 
       {/* Backup Status Card */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-2">
+      {/* Backup Status Card */}
+      <div className="bg-[#0c1322] border border-cyan-950/70 rounded-2xl p-4 space-y-2">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <ShieldCheck className="w-5 h-5 text-emerald-400" />
+            <ShieldCheck className="w-5 h-5 text-cyan-400" />
             <span className="text-sm font-bold text-slate-200">Local Storage Backup</span>
           </div>
           <span className="text-xs text-slate-400">
@@ -79,7 +80,7 @@ export const ExportView: React.FC<ExportViewProps> = ({ allEntries, onExportDone
         </p>
         <div className="pt-1 flex items-center gap-1.5 text-xs text-slate-400 font-mono">
           <span>Last exported:</span>
-          <span className="text-amber-400 font-semibold">
+          <span className="text-cyan-400 font-semibold">
             {lastExportTs ? format(new Date(lastExportTs), 'PPpp') : 'Never'}
           </span>
         </div>
@@ -99,13 +100,13 @@ export const ExportView: React.FC<ExportViewProps> = ({ allEntries, onExportDone
           type="button"
           onClick={handleDownloadCSV}
           disabled={allEntries.length === 0}
-          className="h-14 bg-slate-900 hover:bg-slate-800 border border-slate-700/80 active:scale-[0.99] rounded-2xl p-3 flex items-center gap-3 text-left transition-all disabled:opacity-50 touch-manipulation shadow-md"
+          className="h-14 bg-[#0c1322] hover:bg-[#10192d] border border-cyan-950/70 active:scale-[0.99] rounded-2xl p-3 flex items-center gap-3 text-left transition-all disabled:opacity-50 touch-manipulation shadow-md"
         >
-          <div className="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center shrink-0">
+          <div className="w-10 h-10 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center shrink-0">
             <Download className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-sm font-bold text-slate-100">Export CSV</div>
+            <div className="text-sm font-bold text-white">Export CSV</div>
             <div className="text-[11px] text-slate-400">Universal comma-separated file</div>
           </div>
         </button>
@@ -114,13 +115,13 @@ export const ExportView: React.FC<ExportViewProps> = ({ allEntries, onExportDone
           type="button"
           onClick={handleDownloadXLSX}
           disabled={allEntries.length === 0}
-          className="h-14 bg-slate-900 hover:bg-slate-800 border border-slate-700/80 active:scale-[0.99] rounded-2xl p-3 flex items-center gap-3 text-left transition-all disabled:opacity-50 touch-manipulation shadow-md"
+          className="h-14 bg-[#0c1322] hover:bg-[#10192d] border border-cyan-950/70 active:scale-[0.99] rounded-2xl p-3 flex items-center gap-3 text-left transition-all disabled:opacity-50 touch-manipulation shadow-md"
         >
-          <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0">
+          <div className="w-10 h-10 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center shrink-0">
             <FileSpreadsheet className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-sm font-bold text-slate-100">Export Excel (.xlsx)</div>
+            <div className="text-sm font-bold text-white">Export Excel (.xlsx)</div>
             <div className="text-[11px] text-slate-400">Formatted spreadsheet for Excel/Sheets</div>
           </div>
         </button>
@@ -131,7 +132,7 @@ export const ExportView: React.FC<ExportViewProps> = ({ allEntries, onExportDone
         type="button"
         onClick={handleCopyClipboard}
         disabled={allEntries.length === 0}
-        className="w-full py-3 px-4 rounded-2xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-200 text-xs font-semibold flex items-center justify-center gap-2 transition-colors disabled:opacity-50 touch-manipulation"
+        className="w-full py-3 px-4 rounded-2xl bg-[#0c1322] hover:bg-[#10192d] border border-cyan-950/70 text-cyan-300 text-xs font-semibold flex items-center justify-center gap-2 transition-colors disabled:opacity-50 touch-manipulation"
       >
         {copied ? (
           <>
@@ -140,16 +141,16 @@ export const ExportView: React.FC<ExportViewProps> = ({ allEntries, onExportDone
           </>
         ) : (
           <>
-            <Copy className="w-4 h-4 text-slate-400" />
+            <Copy className="w-4 h-4 text-cyan-400" />
             <span>Copy CSV Data to Clipboard</span>
           </>
         )}
       </button>
 
       {/* Data Format Schema Preview */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-3">
-        <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-300">
-          <Table className="w-4 h-4 text-amber-400" />
+      <div className="bg-[#0c1322] border border-cyan-950/70 rounded-2xl p-4 space-y-3">
+        <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-cyan-200/80">
+          <Table className="w-4 h-4 text-cyan-400" />
           <span>Export Schema & Sample Rows</span>
         </div>
 

@@ -14,8 +14,8 @@ export default defineConfig({
         name: 'Swell-o - Joint & Flare Tracker',
         short_name: 'Swell-o',
         description: 'Frictionless arthritis and joint swelling diary and tracker',
-        theme_color: '#0f172a',
-        background_color: '#0f172a',
+        theme_color: '#070c18',
+        background_color: '#070c18',
         display: 'standalone',
         orientation: 'portrait',
         icons: [

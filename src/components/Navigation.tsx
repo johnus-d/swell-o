@@ -24,7 +24,7 @@ export const Navigation: React.FC<NavigationProps> = ({ activeTab, onTabChange }
   };
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-40 bg-slate-950/90 backdrop-blur-xl border-t border-slate-900 pb-safe">
+    <nav className="fixed bottom-0 left-0 right-0 z-40 bg-[#070c18]/95 backdrop-blur-xl border-t border-cyan-950/60 pb-safe">
       <div className="max-w-md mx-auto grid grid-cols-5 px-1 py-1.5">
         {tabs.map((tab) => {
           const isActive = activeTab === tab.id;
@@ -35,19 +35,19 @@ export const Navigation: React.FC<NavigationProps> = ({ activeTab, onTabChange }
               onClick={() => handleSelect(tab.id)}
               className={`flex flex-col items-center justify-center py-1.5 px-1 rounded-2xl transition-all duration-150 touch-manipulation select-none ${
                 isActive
-                  ? 'text-amber-400 font-bold'
+                  ? 'text-cyan-300 font-bold'
                   : 'text-slate-400 hover:text-slate-200 active:scale-95'
               }`}
               style={{ minHeight: '48px' }}
             >
-              <span className={`text-xl transition-transform ${isActive ? 'scale-115' : 'opacity-80'}`}>
+              <span className={`text-xl transition-transform ${isActive ? 'scale-115 drop-shadow-[0_0_8px_rgba(34,211,238,0.4)]' : 'opacity-80'}`}>
                 {tab.emoji}
               </span>
-              <span className={`text-[10px] mt-0.5 tracking-tight ${isActive ? 'text-amber-400 font-extrabold' : 'text-slate-400 font-medium'}`}>
+              <span className={`text-[10px] mt-0.5 tracking-tight ${isActive ? 'text-cyan-300 font-extrabold' : 'text-slate-400 font-medium'}`}>
                 {tab.label}
               </span>
               {isActive && (
-                <span className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-0.5 shadow-sm shadow-amber-400" />
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 mt-0.5 shadow-[0_0_6px_#22d3ee]" />
               )}
             </button>
           );

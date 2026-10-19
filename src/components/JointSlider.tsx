@@ -31,7 +31,7 @@ export const JointSlider: React.FC<JointSliderProps> = ({
       <div className="flex items-center justify-between">
         <label className="text-xs font-semibold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
           <span>Severity</span>
-          <span className="text-amber-400 font-bold">*</span>
+          <span className="text-cyan-400 font-bold">*</span>
           {!isSelected && (
             <span className={`text-[11px] font-normal ${requiredError ? 'text-red-400 font-semibold' : 'text-slate-400'}`}>
               (Required)
@@ -90,7 +90,7 @@ export const JointSlider: React.FC<JointSliderProps> = ({
                 <span
                   className={`text-xs font-bold transition-colors ${
                     isTickActive
-                      ? 'text-amber-400 scale-110'
+                      ? 'text-cyan-400 scale-110 drop-shadow-[0_0_6px_rgba(34,211,238,0.5)]'
                       : 'text-slate-400 group-hover:text-slate-200'
                   }`}
                 >
@@ -99,7 +99,7 @@ export const JointSlider: React.FC<JointSliderProps> = ({
                 <span
                   className={`text-[10px] tracking-tight uppercase mt-0.5 transition-colors ${
                     isTickActive
-                      ? 'text-amber-300 font-semibold'
+                      ? 'text-cyan-300 font-bold'
                       : 'text-slate-500 group-hover:text-slate-400'
                   }`}
                 >

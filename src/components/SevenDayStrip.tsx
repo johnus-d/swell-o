@@ -36,21 +36,21 @@ export const SevenDayStrip: React.FC<SevenDayStripProps> = ({
   const isSelectedOutside7Days = !days.some((d) => isSameDay(d, selectedDateObj));
 
   return (
-    <div className="w-full bg-slate-900/90 border border-slate-800/80 rounded-2xl p-2.5 shadow-lg backdrop-blur-md">
+    <div className="w-full bg-[#0c1322]/95 border border-cyan-950/70 rounded-2xl p-2.5 shadow-lg shadow-cyan-950/20 backdrop-blur-md">
       <div className="flex items-center justify-between mb-2 px-1">
-        <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+        <span className="text-xs font-semibold uppercase tracking-wider text-cyan-200/70">
           Select Date
         </span>
         <button
           type="button"
           onClick={onOpenCalendar}
-          className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-400 transition-colors"
+          className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold rounded-lg bg-cyan-950/60 hover:bg-cyan-900/60 text-cyan-300 border border-cyan-800/40 transition-colors"
           title="Open full month calendar"
         >
-          <CalendarIcon className="w-3.5 h-3.5" />
+          <CalendarIcon className="w-3.5 h-3.5 text-cyan-400" />
           <span>Calendar</span>
           {isSelectedOutside7Days && (
-            <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-amber-500/20 text-amber-300 rounded">
+            <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-cyan-500/20 text-cyan-200 rounded">
               {format(selectedDateObj, 'MMM d')}
             </span>
           )}
@@ -76,10 +76,10 @@ export const SevenDayStrip: React.FC<SevenDayStripProps> = ({
                 touch-manipulation select-none
                 ${
                   isSelected
-                    ? 'bg-gradient-to-b from-amber-400 to-amber-500 text-slate-950 font-bold shadow-md shadow-amber-500/20 scale-[1.02]'
-                    : 'bg-slate-950/60 hover:bg-slate-800/80 text-slate-300 active:scale-95'
+                    ? 'bg-gradient-to-b from-cyan-400 via-sky-400 to-indigo-500 text-slate-950 font-bold shadow-md shadow-cyan-500/25 scale-[1.02]'
+                    : 'bg-[#070c18]/80 hover:bg-slate-800/80 text-slate-300 active:scale-95 border border-slate-800/50'
                 }
-                ${isDayToday && !isSelected ? 'ring-1 ring-amber-400/40' : ''}
+                ${isDayToday && !isSelected ? 'ring-1 ring-cyan-400/50' : ''}
               `}
             >
               {/* Day of Week (3 letters) */}

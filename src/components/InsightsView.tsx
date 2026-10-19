@@ -146,12 +146,12 @@ export const InsightsView: React.FC<InsightsViewProps> = ({ allEntries }) => {
     const labels = distinctDates.map((d) => format(parseISO(d), 'MMM d'));
 
     const colorPalette = [
-      { border: '#f59e0b', bg: 'rgba(245, 158, 11, 0.15)' }, // Amber
-      { border: '#38bdf8', bg: 'rgba(56, 189, 248, 0.15)' }, // Sky
-      { border: '#ec4899', bg: 'rgba(236, 72, 153, 0.15)' }, // Pink
-      { border: '#10b981', bg: 'rgba(16, 185, 129, 0.15)' }, // Emerald
-      { border: '#a855f7', bg: 'rgba(168, 85, 247, 0.15)' }, // Purple
-      { border: '#f97316', bg: 'rgba(249, 115, 22, 0.15)' }  // Orange
+      { border: '#22d3ee', bg: 'rgba(34, 211, 238, 0.18)' }, // Cyan
+      { border: '#818cf8', bg: 'rgba(129, 140, 248, 0.18)' }, // Indigo
+      { border: '#38bdf8', bg: 'rgba(56, 189, 248, 0.18)' }, // Sky
+      { border: '#a78bfa', bg: 'rgba(167, 139, 250, 0.18)' }, // Violet
+      { border: '#34d399', bg: 'rgba(52, 211, 153, 0.18)' }, // Emerald
+      { border: '#f472b6', bg: 'rgba(244, 114, 182, 0.18)' }  // Pink
     ];
 
     if (seriesMode === 'all') {
@@ -181,13 +181,13 @@ export const InsightsView: React.FC<InsightsViewProps> = ({ allEntries }) => {
           {
             label: metricLabel,
             data: dataPoints,
-            borderColor: '#f59e0b',
-            backgroundColor: 'rgba(245, 158, 11, 0.18)',
+            borderColor: '#22d3ee',
+            backgroundColor: 'rgba(34, 211, 238, 0.18)',
             fill: true,
             tension: 0.35, // Smoothed timeline
             borderWidth: 3,
-            pointBackgroundColor: '#f59e0b',
-            pointBorderColor: '#0f172a',
+            pointBackgroundColor: '#22d3ee',
+            pointBorderColor: '#070c18',
             pointBorderWidth: 2,
             pointRadius: 4,
             pointHoverRadius: 6
@@ -345,78 +345,78 @@ export const InsightsView: React.FC<InsightsViewProps> = ({ allEntries }) => {
 
       {/* Quick Summary Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-3 space-y-1">
-          <div className="flex items-center gap-1.5 text-amber-400 text-xs font-semibold">
-            <Flame className="w-4 h-4" />
+        <div className="bg-[#0c1322] border border-cyan-950/70 rounded-2xl p-3 space-y-1 shadow-md">
+          <div className="flex items-center gap-1.5 text-cyan-400 text-xs font-semibold">
+            <Flame className="w-4 h-4 text-cyan-400" />
             <span>Peak Flare</span>
           </div>
-          <div className="text-xl font-extrabold text-slate-100">
+          <div className="text-xl font-extrabold text-white">
             {summary.maxSeverity} <span className="text-xs font-normal text-slate-400">/ 10</span>
           </div>
-          <div className="text-[10px] text-slate-500 truncate">
+          <div className="text-[10px] text-cyan-200/70 truncate">
             {getSeverityDescription(summary.maxSeverity)}
           </div>
         </div>
 
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-3 space-y-1">
+        <div className="bg-[#0c1322] border border-cyan-950/70 rounded-2xl p-3 space-y-1 shadow-md">
           <div className="flex items-center gap-1.5 text-sky-400 text-xs font-semibold">
-            <Activity className="w-4 h-4" />
+            <Activity className="w-4 h-4 text-sky-400" />
             <span>Avg Severity</span>
           </div>
-          <div className="text-xl font-extrabold text-slate-100">
+          <div className="text-xl font-extrabold text-white">
             {summary.avgSeverity}
           </div>
-          <div className="text-[10px] text-slate-500">
+          <div className="text-[10px] text-slate-400">
             Across {summary.totalEntries} entries
           </div>
         </div>
 
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-3 space-y-1">
-          <div className="flex items-center gap-1.5 text-red-400 text-xs font-semibold">
-            <ShieldAlert className="w-4 h-4" />
+        <div className="bg-[#0c1322] border border-cyan-950/70 rounded-2xl p-3 space-y-1 shadow-md">
+          <div className="flex items-center gap-1.5 text-indigo-400 text-xs font-semibold">
+            <ShieldAlert className="w-4 h-4 text-indigo-400" />
             <span>Flare Days</span>
           </div>
-          <div className="text-xl font-extrabold text-slate-100">
+          <div className="text-xl font-extrabold text-white">
             {summary.flareDaysCount}
           </div>
-          <div className="text-[10px] text-slate-500">
+          <div className="text-[10px] text-slate-400">
             Severity ≥ 4 (Swelling)
           </div>
         </div>
 
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-3 space-y-1">
-          <div className="flex items-center gap-1.5 text-emerald-400 text-xs font-semibold">
-            <BarChart3 className="w-4 h-4" />
+        <div className="bg-[#0c1322] border border-cyan-950/70 rounded-2xl p-3 space-y-1 shadow-md">
+          <div className="flex items-center gap-1.5 text-teal-400 text-xs font-semibold">
+            <BarChart3 className="w-4 h-4 text-teal-400" />
             <span>Top Joint</span>
           </div>
-          <div className="text-base font-extrabold text-slate-100 truncate">
+          <div className="text-base font-extrabold text-white truncate">
             {summary.mostAffectedJoint}
           </div>
-          <div className="text-[10px] text-slate-500">
+          <div className="text-[10px] text-slate-400">
             Most frequent flare
           </div>
         </div>
       </div>
 
       {/* Zoom / Time Range Picker (Default: 1 Month) */}
-      <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-3 space-y-3 shadow-md">
+      <div className="bg-[#0c1322] border border-cyan-950/70 rounded-2xl p-3 space-y-3 shadow-md">
         <div className="flex items-center justify-between">
-          <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
+          <span className="text-xs font-bold uppercase tracking-wider text-cyan-200/70">
             Timeline Zoom
           </span>
-          <span className="text-[11px] text-amber-400 font-semibold">
+          <span className="text-[11px] text-cyan-400 font-semibold">
             {timeRange === '1m' ? 'Default: 1 Month' : timeRange.toUpperCase()}
           </span>
         </div>
 
-        <div className="grid grid-cols-6 gap-1 bg-slate-950 p-1 rounded-xl">
+        <div className="grid grid-cols-6 gap-1 bg-[#070c18] p-1 rounded-xl border border-cyan-950/40">
           {(['7d', '1m', '3m', '6m', '1y', 'all'] as TimeRange[]).map((r) => (
             <button
               key={r}
               onClick={() => setTimeRange(r)}
               className={`py-1.5 text-xs font-bold rounded-lg transition-all touch-manipulation ${
                 timeRange === r
-                  ? 'bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20'
+                  ? 'bg-gradient-to-r from-cyan-400 to-sky-500 text-slate-950 shadow-md shadow-cyan-500/25'
                   : 'text-slate-400 hover:text-slate-200'
               }`}
             >
@@ -426,9 +426,9 @@ export const InsightsView: React.FC<InsightsViewProps> = ({ allEntries }) => {
         </div>
 
         {/* Plot Metric Selector: max severity (default), joint count, severity sum */}
-        <div className="space-y-1.5 pt-1 border-t border-slate-800/80">
+        <div className="space-y-1.5 pt-1 border-t border-cyan-950/60">
           <div className="flex items-center gap-1.5 text-xs font-semibold text-slate-300">
-            <TrendingUp className="w-3.5 h-3.5 text-amber-400" />
+            <TrendingUp className="w-3.5 h-3.5 text-cyan-400" />
             <span>Available Plot Metric:</span>
           </div>
           <div className="grid grid-cols-3 gap-1.5">
@@ -442,8 +442,8 @@ export const InsightsView: React.FC<InsightsViewProps> = ({ allEntries }) => {
                 onClick={() => setPlotMetric(m.id)}
                 className={`py-2 px-2 text-xs font-semibold rounded-xl border transition-all touch-manipulation ${
                   plotMetric === m.id
-                    ? 'bg-slate-800 border-amber-400/80 text-amber-300 shadow-sm'
-                    : 'bg-slate-950/70 border-slate-800 text-slate-400 hover:text-slate-200'
+                    ? 'bg-[#070c18] border-cyan-400 text-cyan-300 shadow-sm shadow-cyan-500/10'
+                    : 'bg-[#070c18]/60 border-slate-800 text-slate-400 hover:text-slate-200'
                 }`}
               >
                 {m.label}
@@ -453,17 +453,17 @@ export const InsightsView: React.FC<InsightsViewProps> = ({ allEntries }) => {
         </div>
 
         {/* Series Selector: All, Joint, Side */}
-        <div className="space-y-1.5 pt-1 border-t border-slate-800/80">
+        <div className="space-y-1.5 pt-1 border-t border-cyan-950/60">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-1.5 text-xs font-semibold text-slate-300">
-              <Layers className="w-3.5 h-3.5 text-amber-400" />
+              <Layers className="w-3.5 h-3.5 text-cyan-400" />
               <span>Available Series:</span>
             </div>
             {seriesMode === 'joint' && jointsInRange.length > 0 && (
               <select
                 value={selectedJoint}
                 onChange={(e) => setSelectedJoint(e.target.value)}
-                className="bg-slate-950 border border-slate-800 text-[11px] text-slate-200 rounded-lg px-2 py-1 focus:outline-none focus:ring-1 focus:ring-amber-500"
+                className="bg-[#070c18] border border-slate-800 text-[11px] text-slate-200 rounded-lg px-2 py-1 focus:outline-none focus:ring-1 focus:ring-cyan-500"
               >
                 <option value="all">Top Joints (Combined)</option>
                 {jointsInRange.map((j) => (
@@ -485,8 +485,8 @@ export const InsightsView: React.FC<InsightsViewProps> = ({ allEntries }) => {
                 onClick={() => setSeriesMode(s.id)}
                 className={`py-2 px-2 text-xs font-semibold rounded-xl border transition-all touch-manipulation ${
                   seriesMode === s.id
-                    ? 'bg-slate-800 border-amber-400/80 text-amber-300 shadow-sm'
-                    : 'bg-slate-950/70 border-slate-800 text-slate-400 hover:text-slate-200'
+                    ? 'bg-[#070c18] border-cyan-400 text-cyan-300 shadow-sm shadow-cyan-500/10'
+                    : 'bg-[#070c18]/60 border-slate-800 text-slate-400 hover:text-slate-200'
                 }`}
               >
                 {s.label}

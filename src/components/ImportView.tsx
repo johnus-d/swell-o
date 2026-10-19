@@ -102,16 +102,16 @@ export const ImportView: React.FC<ImportViewProps> = ({ onImportComplete }) => {
       )}
 
       {/* Upload Box */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-4">
+      <div className="bg-[#0c1322] border border-cyan-950/70 rounded-2xl p-5 space-y-4">
         <div
           onClick={() => fileInputRef.current?.click()}
-          className="border-2 border-dashed border-slate-700 hover:border-amber-400/70 bg-slate-950/60 hover:bg-slate-950/90 rounded-2xl p-6 text-center cursor-pointer transition-all space-y-2 group"
+          className="border-2 border-dashed border-slate-700/80 hover:border-cyan-400/80 bg-[#070c18] hover:bg-[#070c18]/90 rounded-2xl p-6 text-center cursor-pointer transition-all space-y-2 group"
         >
-          <div className="w-12 h-12 mx-auto rounded-full bg-slate-800 group-hover:bg-amber-500/10 text-slate-400 group-hover:text-amber-400 flex items-center justify-center transition-colors">
+          <div className="w-12 h-12 mx-auto rounded-full bg-cyan-950/40 border border-cyan-800/40 text-cyan-400 group-hover:bg-cyan-500/20 group-hover:text-cyan-300 flex items-center justify-center transition-colors">
             <Upload className="w-6 h-6" />
           </div>
           <div>
-            <span className="text-sm font-bold text-slate-200 group-hover:text-amber-300 transition-colors">
+            <span className="text-sm font-bold text-slate-200 group-hover:text-cyan-300 transition-colors">
               Tap to browse CSV or Excel (.xlsx) file
             </span>
             <p className="text-xs text-slate-500 mt-0.5">Supports CSV, XLSX, XLS spreadsheets</p>
@@ -131,7 +131,7 @@ export const ImportView: React.FC<ImportViewProps> = ({ onImportComplete }) => {
           <button
             type="button"
             onClick={() => setIsPastingText(!isPastingText)}
-            className="text-xs text-amber-400 hover:text-amber-300 font-semibold flex items-center gap-1.5"
+            className="text-xs text-cyan-400 hover:text-cyan-300 font-semibold flex items-center gap-1.5"
           >
             <FileText className="w-3.5 h-3.5" />
             <span>{isPastingText ? 'Hide paste text field' : 'Or paste raw CSV text'}</span>
@@ -144,7 +144,7 @@ export const ImportView: React.FC<ImportViewProps> = ({ onImportComplete }) => {
                 value={rawText}
                 onChange={(e) => setRawText(e.target.value)}
                 placeholder="Date,Joint,Side,Severity,Severity description,Notes&#10;2026-10-19,Knee,right,4,Mild swelling,Sample note..."
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs font-mono text-slate-100 placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                className="w-full bg-[#070c18] border border-slate-800 rounded-xl p-3 text-xs font-mono text-slate-100 placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-cyan-500"
               />
               <button
                 type="button"
@@ -232,7 +232,7 @@ export const ImportView: React.FC<ImportViewProps> = ({ onImportComplete }) => {
           )}
 
           {/* Import Mode Options */}
-          <div className="space-y-2 pt-2 border-t border-slate-800">
+          <div className="space-y-2 pt-2 border-t border-cyan-950/60">
             <span className="text-xs font-semibold text-slate-300">Choose Import Mode:</span>
             <div className="grid grid-cols-2 gap-2">
               <button
@@ -240,11 +240,11 @@ export const ImportView: React.FC<ImportViewProps> = ({ onImportComplete }) => {
                 onClick={() => setImportMode('merge')}
                 className={`p-3 rounded-xl border text-left transition-all ${
                   importMode === 'merge'
-                    ? 'bg-amber-500/10 border-amber-500 text-amber-200 shadow-sm'
-                    : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-200'
+                    ? 'bg-cyan-500/15 border-cyan-400 text-cyan-200 shadow-sm shadow-cyan-500/10'
+                    : 'bg-[#070c18] border-slate-800 text-slate-400 hover:text-slate-200'
                 }`}
               >
-                <div className="text-xs font-bold">Merge with Existing</div>
+                <div className="text-xs font-bold text-cyan-300">Merge with Existing</div>
                 <div className="text-[10px] text-slate-400 mt-0.5">Keeps current entries, updates overlaps</div>
               </button>
 
@@ -253,8 +253,8 @@ export const ImportView: React.FC<ImportViewProps> = ({ onImportComplete }) => {
                 onClick={() => setImportMode('replace')}
                 className={`p-3 rounded-xl border text-left transition-all ${
                   importMode === 'replace'
-                    ? 'bg-red-500/10 border-red-500 text-red-200 shadow-sm'
-                    : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-200'
+                    ? 'bg-red-500/15 border-red-500 text-red-200 shadow-sm'
+                    : 'bg-[#070c18] border-slate-800 text-slate-400 hover:text-slate-200'
                 }`}
               >
                 <div className="text-xs font-bold text-red-300">Replace All Data</div>
@@ -268,7 +268,7 @@ export const ImportView: React.FC<ImportViewProps> = ({ onImportComplete }) => {
             type="button"
             onClick={handleConfirmImport}
             disabled={importResult.validEntries.length === 0}
-            className="w-full h-12 bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-sm rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 active:scale-[0.99] transition-all disabled:opacity-50"
+            className="w-full h-12 bg-gradient-to-r from-cyan-400 via-sky-400 to-indigo-500 hover:brightness-110 text-slate-950 font-black text-sm rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/25 active:scale-[0.99] transition-all disabled:opacity-50"
           >
             <span>Confirm & Import {importResult.validEntries.length} Records</span>
             <ArrowRight className="w-4 h-4" />

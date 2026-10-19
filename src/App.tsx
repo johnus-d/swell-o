@@ -7,6 +7,7 @@ import { InsightsView } from './components/InsightsView';
 import { ExportView } from './components/ExportView';
 import { ImportView } from './components/ImportView';
 import { BackupReminderBanner } from './components/BackupReminderBanner';
+import { SplashScreen } from './components/SplashScreen';
 import {
   getAllEntries,
   getCollapsedDayRecords,
@@ -21,6 +22,15 @@ export const App: React.FC = () => {
   const [dayRecords, setDayRecords] = useState<DayRecord[]>(() => getCollapsedDayRecords());
   const [dateToEdit, setDateToEdit] = useState<string | undefined>(undefined);
   const [showBackupReminder, setShowBackupReminder] = useState<boolean>(false);
+  const [showSplash, setShowSplash] = useState<boolean>(() => {
+    // Show splash once per browser session
+    const seen = sessionStorage.getItem('swello_splash_seen');
+    if (!seen) {
+      sessionStorage.setItem('swello_splash_seen', 'true');
+      return true;
+    }
+    return false;
+  });
 
   // Reload data from local storage
   const refreshData = useCallback(() => {
@@ -56,11 +66,15 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
+    <div className="min-h-screen bg-[#070c18] text-slate-100 flex flex-col font-sans">
+      {/* Splash Screen */}
+      {showSplash && <SplashScreen onDismiss={() => setShowSplash(false)} />}
+
       {/* Top Header */}
       <Header
         onLoadSampleData={handleLoadSampleData}
         entriesCount={allEntries.length}
+        onShowSplash={() => setShowSplash(true)}
       />
 
       {/* Main Content Area */}

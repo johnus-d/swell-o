@@ -7,6 +7,7 @@
 ## Table of Contents
 
 - [Overview](#overview)
+- [Brand Identity & Visual Assets](#brand-identity--visual-assets)
 - [Key Features](#key-features)
   - [1. Frictionless Entry & Editing (`➕ Track`)](#1-frictionless-entry--editing--track)
   - [2. Collapsed Flare Diary (`📋 Diary`)](#2-collapsed-flare-diary--diary)
@@ -23,6 +24,26 @@
   - [Verification Tests](#verification-tests)
 - [iPhone Installation (Add to Home Screen)](#iphone-installation-add-to-home-screen)
 - [License](#license)
+
+---
+
+## Brand Identity & Visual Assets
+
+Swell-o incorporates dedicated visual assets designed to create a serene, clinical-grade diary feel:
+
+- **App Logo (`/app-logo.png`, `/apple-touch-icon.png`)**:
+  - Sourced from the high-resolution joint-flame emblem (`Gemini_Generated_Image_oqonmjoqonmjoqon.jpeg`).
+  - Represents the intersection of bone anatomy and inflammatory flare waves with luminous cyan, sky blue, and violet gradients.
+- **Splash Screen (`/splash-screen.jpg`)**:
+  - Utilizes the dark glowing version (`Gemini_Generated_Image_3stuna3stuna3stu.jpeg`) for a smooth launch experience that gently fades into the app interface.
+- **Homescreen Banner (`/homescreen-banner.jpg`)**:
+  - Utilizes the ambient desk and journal scene (`Gemini_Generated_Image_fecyqsfecyqsfecy.jpeg`) displayed at the top of the tracker with cyan/indigo vignette overlays.
+- **Color Palette**:
+  - **Background**: Deep Midnight Navy (`#070c18`).
+  - **Surface & Cards**: Rich Navy Slate (`#0c1322` with `#0e182e` borders).
+  - **Primary Highlights**: Electric Cyan (`#22d3ee`) & Sky Blue (`#38bdf8`).
+  - **Secondary Accents**: Luminous Indigo & Violet (`#818cf8`, `#a78bfa`).
+  - **Severity Spectrum**: Calibrated medical gradient from Green (0) to Yellow (2) to Red (8) to Black (10).
 
 ---
 

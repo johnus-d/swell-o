@@ -63,7 +63,7 @@ export const DiaryView: React.FC<DiaryViewProps> = ({
           <button
             type="button"
             onClick={onNewEntryClick}
-            className="px-3.5 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs flex items-center gap-1.5 transition-colors shadow-md shadow-amber-500/20 active:scale-95"
+            className="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-cyan-400 to-sky-500 hover:brightness-110 text-slate-950 font-extrabold text-xs flex items-center gap-1.5 transition-colors shadow-md shadow-cyan-500/20 active:scale-95"
           >
             <span>➕ Track Entry</span>
           </button>
@@ -78,14 +78,14 @@ export const DiaryView: React.FC<DiaryViewProps> = ({
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search notes, joints, dates..."
-              className="w-full bg-slate-900 border border-slate-800 rounded-xl pl-9 pr-3 py-2 text-xs text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500"
+              className="w-full bg-[#0c1322] border border-cyan-950/70 rounded-xl pl-9 pr-3 py-2 text-xs text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500"
             />
           </div>
 
           <select
             value={selectedJointFilter}
             onChange={(e) => setSelectedJointFilter(e.target.value)}
-            className="bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:ring-2 focus:ring-amber-500"
+            className="bg-[#0c1322] border border-cyan-950/70 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:ring-2 focus:ring-cyan-500"
           >
             <option value="all">All Joints</option>
             {allJoints.map((j) => (
@@ -99,9 +99,9 @@ export const DiaryView: React.FC<DiaryViewProps> = ({
 
       {/* List of Collapsed Day Records */}
       {filteredRecords.length === 0 ? (
-        <div className="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-8 text-center space-y-3">
-          <div className="w-12 h-12 mx-auto rounded-full bg-slate-800 flex items-center justify-center text-slate-400">
-            <Activity className="w-6 h-6 text-amber-400" />
+        <div className="bg-[#0c1322]/80 border border-cyan-950/70 rounded-2xl p-8 text-center space-y-3">
+          <div className="w-12 h-12 mx-auto rounded-full bg-cyan-950/40 border border-cyan-800/40 flex items-center justify-center text-slate-400">
+            <Activity className="w-6 h-6 text-cyan-400" />
           </div>
           <h3 className="text-base font-bold text-slate-200">No entries found</h3>
           <p className="text-xs text-slate-400 max-w-xs mx-auto">
@@ -112,7 +112,7 @@ export const DiaryView: React.FC<DiaryViewProps> = ({
           {!searchTerm && selectedJointFilter === 'all' && (
             <button
               onClick={onNewEntryClick}
-              className="mt-2 px-4 py-2 rounded-xl bg-amber-500 text-slate-950 font-bold text-xs"
+              className="mt-2 px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-400 to-sky-500 text-slate-950 font-bold text-xs"
             >
               Add First Entry
             </button>
@@ -129,16 +129,16 @@ export const DiaryView: React.FC<DiaryViewProps> = ({
               <div
                 key={record.date}
                 onClick={() => onSelectDateToEdit(record.date)}
-                className="group bg-slate-900 hover:bg-slate-850 border border-slate-800 hover:border-slate-700/80 rounded-2xl p-4 transition-all duration-150 cursor-pointer shadow-md hover:shadow-lg space-y-3"
+                className="group bg-[#0c1322] hover:bg-[#10192d] border border-cyan-950/70 hover:border-cyan-800/80 rounded-2xl p-4 transition-all duration-150 cursor-pointer shadow-md hover:shadow-lg space-y-3"
               >
                 {/* Header: Date and Max Severity Badge */}
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2.5">
-                    <div className="p-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-300">
-                      <Calendar className="w-4 h-4 text-amber-400" />
+                    <div className="p-2 rounded-xl bg-[#070c18] border border-cyan-950/60 text-slate-300">
+                      <Calendar className="w-4 h-4 text-cyan-400" />
                     </div>
                     <div>
-                      <h3 className="text-sm font-extrabold text-slate-100 group-hover:text-amber-300 transition-colors">
+                      <h3 className="text-sm font-extrabold text-slate-100 group-hover:text-cyan-300 transition-colors">
                         {format(dateObj, 'EEE, MMMM d, yyyy')}
                       </h3>
                       <span className="text-[11px] text-slate-500">
@@ -160,7 +160,7 @@ export const DiaryView: React.FC<DiaryViewProps> = ({
                       <span>Max {record.maxSeverity}</span>
                     </div>
 
-                    <div className="p-1.5 rounded-lg text-slate-500 group-hover:text-amber-400 group-hover:bg-slate-800 transition-colors">
+                    <div className="p-1.5 rounded-lg text-slate-500 group-hover:text-cyan-300 group-hover:bg-cyan-950/40 transition-colors">
                       <Edit2 className="w-3.5 h-3.5" />
                     </div>
                   </div>
