@@ -1,4 +1,5 @@
 import React from 'react';
+import { PlusCircle, BookOpen, TrendingUp, Download, Upload } from 'lucide-react';
 
 export type TabType = 'entry' | 'diary' | 'insights' | 'export' | 'import';
 
@@ -8,12 +9,16 @@ interface NavigationProps {
 }
 
 export const Navigation: React.FC<NavigationProps> = ({ activeTab, onTabChange }) => {
-  const tabs: { id: TabType; emoji: string; label: string }[] = [
-    { id: 'entry', emoji: '➕', label: 'Track' },
-    { id: 'diary', emoji: '📋', label: 'Diary' },
-    { id: 'insights', emoji: '📈', label: 'Insights' },
-    { id: 'export', emoji: '💾', label: 'Export' },
-    { id: 'import', emoji: '📥', label: 'Import' }
+  const tabs: {
+    id: TabType;
+    label: string;
+    icon: React.ComponentType<{ className?: string }>;
+  }[] = [
+    { id: 'entry', label: 'Track', icon: PlusCircle },
+    { id: 'diary', label: 'Diary', icon: BookOpen },
+    { id: 'insights', label: 'Insights', icon: TrendingUp },
+    { id: 'export', label: 'Export', icon: Download },
+    { id: 'import', label: 'Import', icon: Upload }
   ];
 
   const handleSelect = (tabId: TabType) => {
@@ -28,6 +33,7 @@ export const Navigation: React.FC<NavigationProps> = ({ activeTab, onTabChange }
       <div className="max-w-md mx-auto grid grid-cols-5 px-1 py-1.5">
         {tabs.map((tab) => {
           const isActive = activeTab === tab.id;
+          const Icon = tab.icon;
           return (
             <button
               key={tab.id}
@@ -40,9 +46,15 @@ export const Navigation: React.FC<NavigationProps> = ({ activeTab, onTabChange }
               }`}
               style={{ minHeight: '48px' }}
             >
-              <span className={`text-xl transition-transform ${isActive ? 'scale-115 drop-shadow-[0_0_8px_rgba(34,211,238,0.4)]' : 'opacity-80'}`}>
-                {tab.emoji}
-              </span>
+              <div className="h-6 flex items-center justify-center">
+                <Icon
+                  className={`w-5 h-5 transition-all duration-150 ${
+                    isActive
+                      ? 'text-cyan-300 scale-110 drop-shadow-[0_0_8px_rgba(34,211,238,0.5)] stroke-[2.3]'
+                      : 'text-slate-400 group-hover:text-slate-200 stroke-[1.8]'
+                  }`}
+                />
+              </div>
               <span className={`text-[10px] mt-0.5 tracking-tight ${isActive ? 'text-cyan-300 font-extrabold' : 'text-slate-400 font-medium'}`}>
                 {tab.label}
               </span>

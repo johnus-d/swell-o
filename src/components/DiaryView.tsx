@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { format, parseISO } from 'date-fns';
-import { Edit2, Search, FileText, Activity, Calendar } from 'lucide-react';
+import { Edit2, Search, FileText, Activity, Calendar, Plus } from 'lucide-react';
 import { DayRecord } from '../types';
 import { getSeverityHexColor, getSeverityDescription } from '../utils/severity';
 
@@ -65,7 +65,8 @@ export const DiaryView: React.FC<DiaryViewProps> = ({
             onClick={onNewEntryClick}
             className="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-cyan-400 to-sky-500 hover:brightness-110 text-slate-950 font-extrabold text-xs flex items-center gap-1.5 transition-colors shadow-md shadow-cyan-500/20 active:scale-95"
           >
-            <span>➕ Track Entry</span>
+            <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
+            <span>Track Entry</span>
           </button>
         </div>
 

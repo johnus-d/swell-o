@@ -85,7 +85,7 @@ export const ImportView: React.FC<ImportViewProps> = ({ onImportComplete }) => {
       {/* Header */}
       <div>
         <h2 className="text-xl font-extrabold text-slate-100 flex items-center gap-2">
-          <span>📥</span>
+          <Upload className="w-5 h-5 text-cyan-400" />
           <span>Import Data</span>
         </h2>
         <p className="text-xs text-slate-400">

@@ -28,9 +28,6 @@ export const Header: React.FC<HeaderProps> = ({ onLoadSampleData, entriesCount, 
             <h1 className="text-base font-black tracking-tight text-white">
               Swell-o
             </h1>
-            <span className="text-[10px] uppercase font-extrabold px-1.5 py-0.2 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">
-              PWA
-            </span>
           </div>
           <p className="text-[10px] text-cyan-200/70 font-medium tracking-wide">
             joint & flare tracker

@@ -14,9 +14,10 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { format, subDays, subMonths, subYears, parseISO, isAfter } from 'date-fns';
-import { Activity, Flame, ShieldAlert, BarChart3, TrendingUp, Layers } from 'lucide-react';
+import { Activity, Flame, ShieldAlert, BarChart3, TrendingUp, Layers, Repeat } from 'lucide-react';
 import { DayRecord, JointEntry, PlotMetric, PlotSeriesMode, TimeRange } from '../types';
 import { getSeverityDescription } from '../utils/severity';
+import { getDailySeveritySeries, computeCycleLength } from '../utils/insights.ts';
 
 // Register Chart.js elements
 ChartJS.register(
@@ -96,11 +97,16 @@ export const InsightsView: React.FC<InsightsViewProps> = ({ allEntries }) => {
   const summary = useMemo(() => {
     if (filteredEntries.length === 0) {
       return {
-        avgSeverity: 0,
+        avgSeverity: '0',
         maxSeverity: 0,
         totalEntries: 0,
         mostAffectedJoint: 'None',
-        flareDaysCount: 0
+        flareDaysCount: 0,
+        cycle: {
+          hasCycle: false,
+          value: '—',
+          detail: 'No entries in timeframe'
+        }
       };
     }
 
@@ -127,14 +133,39 @@ export const InsightsView: React.FC<InsightsViewProps> = ({ allEntries }) => {
       }
     }
 
+    // Calculate cycle length (tip to tip & trough to trough)
+    const seriesToAnalyze =
+      seriesMode === 'joint' && selectedJoint !== 'all'
+        ? filteredEntries.filter((e) => e.joint.toLowerCase() === selectedJoint.toLowerCase())
+        : filteredEntries;
+
+    const currentSeries = getDailySeveritySeries(seriesToAnalyze);
+    let cycleResult = computeCycleLength(currentSeries);
+
+    // If current window is short and has insufficient cycles, check overall history
+    if (!cycleResult.hasCycle && timeRange !== 'all') {
+      const allTimeToAnalyze =
+        seriesMode === 'joint' && selectedJoint !== 'all'
+          ? allEntries.filter((e) => e.joint.toLowerCase() === selectedJoint.toLowerCase())
+          : allEntries;
+      const allTimeResult = computeCycleLength(getDailySeveritySeries(allTimeToAnalyze));
+      if (allTimeResult.hasCycle) {
+        cycleResult = {
+          ...allTimeResult,
+          detail: `${allTimeResult.detail} (all time)`
+        };
+      }
+    }
+
     return {
       avgSeverity: (sumSev / filteredEntries.length).toFixed(1),
       maxSeverity: maxSev,
       totalEntries: filteredEntries.length,
       mostAffectedJoint: topJoint,
-      flareDaysCount: flareDates.size
+      flareDaysCount: flareDates.size,
+      cycle: cycleResult
     };
-  }, [filteredEntries]);
+  }, [filteredEntries, allEntries, seriesMode, selectedJoint, timeRange]);
 
   // Prepare Chart.js Dataset
   const chartData = useMemo<ChartData<'line'>>(() => {
@@ -344,7 +375,7 @@ export const InsightsView: React.FC<InsightsViewProps> = ({ allEntries }) => {
       </div>
 
       {/* Quick Summary Cards */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5">
         <div className="bg-[#0c1322] border border-cyan-950/70 rounded-2xl p-3 space-y-1 shadow-md">
           <div className="flex items-center gap-1.5 text-cyan-400 text-xs font-semibold">
             <Flame className="w-4 h-4 text-cyan-400" />
@@ -385,6 +416,19 @@ export const InsightsView: React.FC<InsightsViewProps> = ({ allEntries }) => {
         </div>
 
         <div className="bg-[#0c1322] border border-cyan-950/70 rounded-2xl p-3 space-y-1 shadow-md">
+          <div className="flex items-center gap-1.5 text-violet-400 text-xs font-semibold">
+            <Repeat className="w-4 h-4 text-violet-400" />
+            <span>Typical Cycle</span>
+          </div>
+          <div className="text-xl font-extrabold text-white">
+            {summary.cycle.value}
+          </div>
+          <div className="text-[10px] text-violet-200/70 truncate" title={summary.cycle.detail}>
+            {summary.cycle.detail}
+          </div>
+        </div>
+
+        <div className="col-span-2 sm:col-span-1 bg-[#0c1322] border border-cyan-950/70 rounded-2xl p-3 space-y-1 shadow-md">
           <div className="flex items-center gap-1.5 text-teal-400 text-xs font-semibold">
             <BarChart3 className="w-4 h-4 text-teal-400" />
             <span>Top Joint</span>

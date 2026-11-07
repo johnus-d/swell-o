@@ -55,7 +55,7 @@ export const ExportView: React.FC<ExportViewProps> = ({ allEntries, onExportDone
       {/* Header */}
       <div>
         <h2 className="text-xl font-extrabold text-slate-100 flex items-center gap-2">
-          <span>💾</span>
+          <Download className="w-5 h-5 text-cyan-400" />
           <span>Export & Backup</span>
         </h2>
         <p className="text-xs text-slate-400">

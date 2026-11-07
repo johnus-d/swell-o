@@ -76,16 +76,20 @@ export const JointSlider: React.FC<JointSliderProps> = ({
           aria-label="Severity rating from 0 to 10"
         />
 
-        {/* Ticks & Short Descriptions */}
-        <div className="relative flex justify-between mt-2 px-0.5 select-none">
+        {/* Ticks & Short Descriptions - Mathematically aligned to thumb center */}
+        <div className="relative w-full h-10 mt-1 select-none">
           {TICKS.map((tick) => {
             const isTickActive = isSelected && currentVal === tick.val;
+            const pct = tick.val / 10;
             return (
               <button
                 key={tick.val}
                 type="button"
                 onClick={() => onChange(tick.val)}
-                className="flex flex-col items-center group -mx-2 px-2 py-1 touch-manipulation focus:outline-none"
+                className="absolute flex flex-col items-center group py-0.5 touch-manipulation focus:outline-none -translate-x-1/2"
+                style={{
+                  left: `calc(14px + ${pct} * (100% - 28px))`
+                }}
               >
                 <span
                   className={`text-xs font-bold transition-colors ${
@@ -97,7 +101,7 @@ export const JointSlider: React.FC<JointSliderProps> = ({
                   {tick.val}
                 </span>
                 <span
-                  className={`text-[10px] tracking-tight uppercase mt-0.5 transition-colors ${
+                  className={`text-[10px] tracking-tight uppercase mt-0.5 transition-colors whitespace-nowrap ${
                     isTickActive
                       ? 'text-cyan-300 font-bold'
                       : 'text-slate-500 group-hover:text-slate-400'

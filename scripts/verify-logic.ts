@@ -118,4 +118,32 @@ assert.strictEqual(parsed.errors.length, 0);
 assert.strictEqual(parsed.validEntries.length, 4);
 assert.strictEqual(parsed.datesCount, 2);
 
+// 6. Flare Cycle Length Calculation
+console.log('Testing flare cycle calculation (tip-to-tip and trough-to-trough)...');
+const { computeCycleLength, getDailySeveritySeries } = await import('../src/utils/insights.ts');
+
+const sampleCycleTimeline = [
+  { date: '2026-09-29', value: 0 },
+  { date: '2026-10-04', value: 7 }, // Peak 1
+  { date: '2026-10-07', value: 2 }, // Trough 1
+  { date: '2026-10-11', value: 5 }, // Peak 2 (7d after Peak 1)
+  { date: '2026-10-14', value: 2 }, // Trough 2 (7d after Trough 1)
+  { date: '2026-10-18', value: 8 }, // Peak 3 (7d after Peak 2)
+  { date: '2026-10-20', value: 0 }  // Trough 3 (6d after Trough 2)
+];
+
+const cycleResult = computeCycleLength(sampleCycleTimeline);
+assert.strictEqual(cycleResult.hasCycle, true);
+assert.strictEqual(cycleResult.avgDays, 7);
+assert.strictEqual(cycleResult.value, '~7 days');
+
+// Test insufficient data
+const shortTimeline = [
+  { date: '2026-10-18', value: 8 },
+  { date: '2026-10-19', value: 6 }
+];
+const shortResult = computeCycleLength(shortTimeline);
+assert.strictEqual(shortResult.hasCycle, false);
+assert.strictEqual(shortResult.value, '—');
+
 console.log('All Swell-o logic verification tests passed with 100% success! 🎉');
