@@ -23,7 +23,7 @@ export const HomescreenBanner: React.FC<HomescreenBannerProps> = ({ entriesToday
       {/* Background Graphic */}
       <div className="relative w-full h-36 sm:h-40 overflow-hidden bg-slate-950">
         <img
-          src="/homescreen-banner.jpg"
+          src={`${import.meta.env.BASE_URL}homescreen-banner.jpg`}
           alt="Swell-o Daily Flare Diary"
           className="w-full h-full object-cover object-center filter brightness-90 contrast-105"
         />

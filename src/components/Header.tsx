@@ -18,7 +18,7 @@ export const Header: React.FC<HeaderProps> = ({ onLoadSampleData, entriesCount, 
           title="Swell-o Joint Flare Tracker Logo (Tap to view splash)"
         >
           <img
-            src="/app-logo.png"
+            src={`${import.meta.env.BASE_URL}app-logo.png`}
             alt="Swell-o Logo"
             className="w-full h-full object-contain p-0.5"
           />

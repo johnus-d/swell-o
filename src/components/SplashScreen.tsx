@@ -34,7 +34,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onDismiss }) => {
         {/* Splash Image */}
         <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden shadow-2xl shadow-cyan-500/20 border border-cyan-900/40">
           <img
-            src="/splash-screen.jpg"
+            src={`${import.meta.env.BASE_URL}splash-screen.jpg`}
             alt="Swell-o — Joint & Flare Tracker"
             className="w-full h-full object-cover"
           />
