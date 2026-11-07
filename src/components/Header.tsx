@@ -4,10 +4,11 @@ import { Sparkles, HelpCircle } from 'lucide-react';
 interface HeaderProps {
   onLoadSampleData: () => void;
   entriesCount: number;
+  onOpenHelp: () => void;
   onShowSplash?: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ onLoadSampleData, entriesCount, onShowSplash }) => {
+export const Header: React.FC<HeaderProps> = ({ onLoadSampleData, entriesCount, onOpenHelp, onShowSplash }) => {
   return (
     <header className="w-full pt-safe px-4 pb-2.5 flex items-center justify-between border-b border-cyan-950/60 bg-[#070c18]/90 backdrop-blur-md sticky top-0 z-30">
       <div className="flex items-center gap-2.5">
@@ -48,16 +49,15 @@ export const Header: React.FC<HeaderProps> = ({ onLoadSampleData, entriesCount, 
           </button>
         )}
 
-        {onShowSplash && (
-          <button
-            type="button"
-            onClick={onShowSplash}
-            className="p-1.5 rounded-xl text-slate-400 hover:text-cyan-300 hover:bg-cyan-950/40 transition-colors"
-            title="View splash screen"
-          >
-            <HelpCircle className="w-4 h-4" />
-          </button>
-        )}
+        <button
+          type="button"
+          onClick={onOpenHelp}
+          className="p-1.5 rounded-xl text-slate-400 hover:text-cyan-300 hover:bg-cyan-950/40 transition-colors"
+          title="Help & User Guide"
+          aria-label="Help & User Guide"
+        >
+          <HelpCircle className="w-4 h-4" />
+        </button>
       </div>
     </header>
   );

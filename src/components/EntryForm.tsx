@@ -9,7 +9,8 @@ import { HomescreenBanner } from './HomescreenBanner';
 import {
   getSortedJointOptions,
   saveEntriesForDate,
-  deleteEntriesForDate
+  deleteEntriesForDate,
+  getCollapsedDayRecords
 } from '../utils/storage';
 
 interface EntryFormProps {
@@ -53,7 +54,7 @@ export const EntryForm: React.FC<EntryFormProps> = ({
 
   // Existing day record for selectedDate if any
   const existingDayRecord = useMemo(
-    () => dayRecords.find((r) => r.date === selectedDate),
+    () => dayRecords.find((r) => r.date === selectedDate) || getCollapsedDayRecords().find((r) => r.date === selectedDate),
     [dayRecords, selectedDate]
   );
 
@@ -69,7 +70,7 @@ export const EntryForm: React.FC<EntryFormProps> = ({
 
   // Load entry for date or reset to defaults
   const loadDateData = (date: string) => {
-    const existing = dayRecords.find((r) => r.date === date);
+    const existing = dayRecords.find((r) => r.date === date) || getCollapsedDayRecords().find((r) => r.date === date);
     if (existing && existing.entries.length > 0) {
       // Load saved entries for this date
       // Note: "sort order unchanged while editing"
@@ -85,7 +86,7 @@ export const EntryForm: React.FC<EntryFormProps> = ({
         date,
         isNew: false,
         joints: loadedJoints.map((j) => ({ joint: j.joint, side: j.side, severity: j.severity })),
-        notes: existing.notes || ''
+        notes: (existing.notes || '').trim()
       });
     } else {
       // New entry with sensible defaults:
@@ -126,12 +127,15 @@ export const EntryForm: React.FC<EntryFormProps> = ({
         // For a new entry, check if user changed anything from blank defaults:
         const firstJoint = joints[0];
         if (!firstJoint) return false;
-        const alteredJoint = firstJoint.joint !== mostCommonJoint;
+        const initialJoint = initial.joints[0]?.joint || mostCommonJoint;
+        const alteredJoint = firstJoint.joint !== initialJoint;
         const alteredSide = firstJoint.side !== 'none';
         const alteredSeverity = firstJoint.severity !== null;
         const hasNotes = notes.trim().length > 0;
         const extraJoints = joints.length > 1;
-        return alteredJoint || alteredSide || alteredSeverity || hasNotes || extraJoints;
+
+        // User must enter real data (severity, side, notes, extra joints) to constitute unsaved changes
+        return alteredSeverity || alteredSide || hasNotes || extraJoints || (alteredJoint && (alteredSeverity || alteredSide));
       } else {
         // For existing entry, check if changed from loaded data
         const currentData = {
@@ -233,6 +237,33 @@ export const EntryForm: React.FC<EntryFormProps> = ({
 
     saveEntriesForDate(selectedDate, rawItems, notes);
 
+    // Sort saved drafts by descending severity to match saved order
+    const indexed = rawItems.map((j, idx) => ({ ...j, idx }));
+    indexed.sort((a, b) => {
+      const diff = b.severity - a.severity;
+      if (diff !== 0) return diff;
+      return a.idx - b.idx;
+    });
+
+    const savedJoints: JointDraftItem[] = indexed.map((item, idx) => ({
+      id: `existing_${selectedDate}_${idx}`,
+      joint: item.joint,
+      side: item.side,
+      severity: item.severity
+    }));
+
+    // Update state to match saved data
+    setJoints(savedJoints);
+    setNotes(notes.trim());
+
+    // Update baseline snapshot immediately so hasUnsavedChanges is false
+    initialSnapshotRef.current = JSON.stringify({
+      date: selectedDate,
+      isNew: false,
+      joints: savedJoints.map((j) => ({ joint: j.joint, side: j.side, severity: j.severity })),
+      notes: notes.trim()
+    });
+
     if ('vibrate' in navigator) {
       navigator.vibrate(25);
     }
@@ -240,8 +271,6 @@ export const EntryForm: React.FC<EntryFormProps> = ({
     setSavedSuccessDate(selectedDate);
     setTimeout(() => setSavedSuccessDate(null), 2500);
 
-    // Refresh snapshot so form is no longer dirty
-    loadDateData(selectedDate);
     onSaved(selectedDate);
   };
 
@@ -252,7 +281,15 @@ export const EntryForm: React.FC<EntryFormProps> = ({
     if ('vibrate' in navigator) {
       navigator.vibrate(20);
     }
-    loadDateData(selectedDate);
+    const newDrafts = createDefaultDraft(mostCommonJoint);
+    setJoints(newDrafts);
+    setNotes('');
+    initialSnapshotRef.current = JSON.stringify({
+      date: selectedDate,
+      isNew: true,
+      joints: newDrafts.map((j) => ({ joint: j.joint, side: j.side, severity: j.severity })),
+      notes: ''
+    });
     if (onDeleted) onDeleted(selectedDate);
   };
 

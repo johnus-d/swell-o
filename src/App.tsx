@@ -8,6 +8,7 @@ import { ExportView } from './components/ExportView';
 import { ImportView } from './components/ImportView';
 import { BackupReminderBanner } from './components/BackupReminderBanner';
 import { SplashScreen } from './components/SplashScreen';
+import { HelpModal } from './components/HelpModal';
 import {
   getAllEntries,
   getCollapsedDayRecords,
@@ -22,6 +23,7 @@ export const App: React.FC = () => {
   const [dayRecords, setDayRecords] = useState<DayRecord[]>(() => getCollapsedDayRecords());
   const [dateToEdit, setDateToEdit] = useState<string | undefined>(undefined);
   const [showBackupReminder, setShowBackupReminder] = useState<boolean>(false);
+  const [showHelp, setShowHelp] = useState<boolean>(false);
   const [showSplash, setShowSplash] = useState<boolean>(() => {
     // Show splash once per browser session
     const seen = sessionStorage.getItem('swello_splash_seen');
@@ -70,10 +72,18 @@ export const App: React.FC = () => {
       {/* Splash Screen */}
       {showSplash && <SplashScreen onDismiss={() => setShowSplash(false)} />}
 
+      {/* Help Modal */}
+      <HelpModal
+        isOpen={showHelp}
+        onClose={() => setShowHelp(false)}
+        onShowSplash={() => setShowSplash(true)}
+      />
+
       {/* Top Header */}
       <Header
         onLoadSampleData={handleLoadSampleData}
         entriesCount={allEntries.length}
+        onOpenHelp={() => setShowHelp(true)}
         onShowSplash={() => setShowSplash(true)}
       />
 
